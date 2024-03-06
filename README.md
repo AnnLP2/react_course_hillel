@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+Render the data from the CARS array as a table (see Fig. 1. Cars Specs).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Before Table render h1: Car Specs
 
-## Available Scripts
+Colors/styles – as you wish. The main thing is correct html markup. 
+An example of table markup is added in the file carsTable.html. In JSX for css class use prop className.
+Array CARS:
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+const CARS = [
+    {
+        id: 1,
+        brand: "Audi",
+        models: [
+            {
+                id: 1,
+                name: "A1",
+                collection: [
+                    {
+                        id: 1,
+                        version: "Sportback",
+                        year: 2019,
+                        horsepower: 95,
+                        engine: 999
+                    },
+                    {
+                        id: 2,
+                        version: "Citycarver",
+                        year: 2019,
+                        horsepower: 95,
+                        engine: 999
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: "Q5",
+                collection: [
+                    {
+                        id: 1,
+                        version: "FY 2021",
+                        year: 2021,
+                        horsepower: 299,
+                        engine: 1984
+                    },
+                    {
+                        id: 2,
+                        version: "Sportback",
+                        year: 2021,
+                        horsepower: 299,
+                        engine: 1984
+                    }
+                ]
+            },
+            {
+                id: 3,
+                name: "TT",
+                collection: [
+                    {
+                        id: 1,
+                        version: "Coupe",
+                        year: 2021,
+                        horsepower: 197,
+                        engine: 1984
+                    },
+                    {
+                        id: 2,
+                        version: "Roadster",
+                        year: 2021,
+                        horsepower: 197,
+                        engine: 1984
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 2,
+        brand: "BMW",
+        models: [
+            {
+                id: 1,
+                name: "8 series",
+                collection: [
+                    {
+                        id: 1,
+                        version: "G1X LCI",
+                        year: 2022,
+                        horsepower: 333,
+                        engine: 2998
+                    },
+                    {
+                        id: 2,
+                        version: "G1X",
+                        year: 2019,
+                        horsepower: 340,
+                        engine: 2998
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: "X6",
+                collection: [
+                    {
+                        id: 1,
+                        version: "G06 LCI",
+                        year: 2023,
+                        horsepower: 530,
+                        engine: 4395
+                    },
+                    {
+                        id: 2,
+                        version: "G06",
+                        year: 2020,
+                        horsepower: 286,
+                        engine: 2993
+                    }
+                ]
+            }
+        ]
+    },
+];
