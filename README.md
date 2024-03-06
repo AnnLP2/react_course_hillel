@@ -1,122 +1,25 @@
-Render the data from the CARS array as a table (see Fig. 1. Cars Specs).
+Завдання: 
+- відрендерити список; 
+- через 1 сек додати в кінець списку елемент і змінити backgroundColor всього списку.
 
-Before Table render h1: Car Specs
+Реалізація:
 
-Colors/styles – as you wish. The main thing is correct html markup. 
-An example of table markup is added in the file carsTable.html. In JSX for css class use prop className.
-Array CARS:
+1) За допомогою Create React App створюємо React-додаток.
+2) В компоненті App виводимо компоненту List, в яку через пропси передаємо:
+- одномірний масив list, наприклад ['Kharkiv',"Mykolaiv', 'Lviv', 'Poltava'];
+- колір color, наприклад "lightblue".
 
-const CARS = [
-    {
-        id: 1,
-        brand: "Audi",
-        models: [
-            {
-                id: 1,
-                name: "A1",
-                collection: [
-                    {
-                        id: 1,
-                        version: "Sportback",
-                        year: 2019,
-                        horsepower: 95,
-                        engine: 999
-                    },
-                    {
-                        id: 2,
-                        version: "Citycarver",
-                        year: 2019,
-                        horsepower: 95,
-                        engine: 999
-                    }
-                ]
-            },
-            {
-                id: 2,
-                name: "Q5",
-                collection: [
-                    {
-                        id: 1,
-                        version: "FY 2021",
-                        year: 2021,
-                        horsepower: 299,
-                        engine: 1984
-                    },
-                    {
-                        id: 2,
-                        version: "Sportback",
-                        year: 2021,
-                        horsepower: 299,
-                        engine: 1984
-                    }
-                ]
-            },
-            {
-                id: 3,
-                name: "TT",
-                collection: [
-                    {
-                        id: 1,
-                        version: "Coupe",
-                        year: 2021,
-                        horsepower: 197,
-                        engine: 1984
-                    },
-                    {
-                        id: 2,
-                        version: "Roadster",
-                        year: 2021,
-                        horsepower: 197,
-                        engine: 1984
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        id: 2,
-        brand: "BMW",
-        models: [
-            {
-                id: 1,
-                name: "8 series",
-                collection: [
-                    {
-                        id: 1,
-                        version: "G1X LCI",
-                        year: 2022,
-                        horsepower: 333,
-                        engine: 2998
-                    },
-                    {
-                        id: 2,
-                        version: "G1X",
-                        year: 2019,
-                        horsepower: 340,
-                        engine: 2998
-                    }
-                ]
-            },
-            {
-                id: 2,
-                name: "X6",
-                collection: [
-                    {
-                        id: 1,
-                        version: "G06 LCI",
-                        year: 2023,
-                        horsepower: 530,
-                        engine: 4395
-                    },
-                    {
-                        id: 2,
-                        version: "G06",
-                        year: 2020,
-                        horsepower: 286,
-                        engine: 2993
-                    }
-                ]
-            }
-        ]
-    },
-];
+В класовому компоненті List:
+1) Зберігаємо дані з this.props в this.state.
+2) Виводимо у вигляді списку ul дані з this.state.list.
+3) Для списку ul задаємо в інлайн-стилях backgroundColor з this.state.color;
+4) В методі constructor пишемо setTimeout, в якому через 1 сек:
+- Додаємо в кінець масиву this.state.list новий елемент, наприклад 'Kyiv';
+- Змінюємо значення this.state.color, наприклад на "lightpink".
+
+🌟 За бажанням можна також реалізувати:
+
+- Вивести кожен елемент масиву з різним рандомним backgroundColor.
+- В окремому setTimeout, який спрацює через 3 сек:
+- Змінити backgroundColor кожного елементу масиву на рандомний;
+- Відсортувати this.state.list за алфавітним порядком.
