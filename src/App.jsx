@@ -1,5 +1,7 @@
-function App() {
-  return <div className="App"></div>;
-}
+import { Component } from "react";
 
-export default App;
+export default class App extends Component {
+  render() {
+    return <div>App</div>;
+  }
+}
