@@ -1,8 +1,13 @@
-# React + Vite
+The program should display a table based on an array of objects:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+const animals = [
+    {type: `turtle`, icon: `🐢`},
+    {type: `octopus`, icon: `🐙`},
+    {type: `fish`, icon: `🐠`},
+    {type: `flamingo`, icon: `🦩`},
+    {type: `penguin`, icon: `🐧`}
+]
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Every 2 seconds a random item from the list is selected. Selected - this means that styles are applied to it - green color and bold font.
+When half of the elements become active (green) – add border to the table (border-width: 10px)
+When all elements are active (green) – change border width of the table to 20px.
