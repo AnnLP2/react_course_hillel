@@ -6,7 +6,7 @@ class AnimalTable extends Component {
     this.state = {
       ...this.props,
       activeIndexes: [],
-      borderWidth: "1px",
+      borderWidth: "0px",
     };
   }
 
