@@ -1,4 +1,5 @@
 import { Component } from "react";
+import "./style.sass";
 
 class AnimalTable extends Component {
   constructor(props) {
@@ -6,12 +7,14 @@ class AnimalTable extends Component {
     this.state = {
       ...this.props,
       activeIndexes: [],
-      borderWidth: "0px",
+      borderWidth: null,
     };
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.selectRandomAnimal(), 2000);
+    this.interval = setInterval(() => {
+      this.selectRandomAnimal();
+    }, 2000);
   }
 
   componentWillUnmount() {
@@ -33,32 +36,30 @@ class AnimalTable extends Component {
     selectedAnimal.isActive = true;
     const updatedActiveIndexes = [...activeIndexes, randomIndex];
 
-    this.setState({
-      animals: [...animals],
-      activeIndexes: updatedActiveIndexes,
-    });
+    this.setState(
+      {
+        animals: [...animals],
+        activeIndexes: updatedActiveIndexes,
+      },
+      () => {
+        if (updatedActiveIndexes.length === Math.ceil(animals.length / 2)) {
+          this.setState({ borderWidth: "10px" });
+        }
 
-    if (updatedActiveIndexes.length === Math.ceil(animals.length / 2)) {
-      this.setState({ borderWidth: "10px" });
-    }
-
-    if (updatedActiveIndexes.length === animals.length) {
-      this.setState({ borderWidth: "20px" });
-    }
+        if (updatedActiveIndexes.length === animals.length) {
+          this.setState({ borderWidth: "20px" });
+          clearInterval(this.interval);
+        }
+      }
+    );
   }
 
   render() {
     return (
-      <table style={{ border: `${this.state.borderWidth} solid green` }}>
+      <table className="table" style={{ borderWidth: this.state.borderWidth }}>
         <tbody>
           {this.state.animals.map((animal, index) => (
-            <tr
-              key={index}
-              style={{
-                color: animal.isActive ? "green" : "inherit",
-                fontWeight: animal.isActive ? "bold" : "normal",
-              }}
-            >
+            <tr className={animal.isActive ? "active" : ""} key={index}>
               <td>{animal.type}</td>
               <td>{animal.icon}</td>
             </tr>
