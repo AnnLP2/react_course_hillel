@@ -37,10 +37,10 @@ class AnimalTable extends Component {
     const updatedActiveIndexes = [...activeIndexes, randomIndex];
 
     this.setState(
-      {
-        animals: [...animals],
+      (actualState) => ({
+        animals: [...actualState.animals],
         activeIndexes: updatedActiveIndexes,
-      },
+      }),
       () => {
         if (updatedActiveIndexes.length === Math.ceil(animals.length / 2)) {
           this.setState({ borderWidth: "10px" });
