@@ -1,13 +1,25 @@
-The program should display a table based on an array of objects:
+Create a RUD-application (read/update/delete) using:
 
-const animals = [
-    {type: `turtle`, icon: `🐢`},
-    {type: `octopus`, icon: `🐙`},
-    {type: `fish`, icon: `🐠`},
-    {type: `flamingo`, icon: `🦩`},
-    {type: `penguin`, icon: `🐧`}
-]
+1) Create React App / Vite
+2) Class components
+3) Get/Update/Delete data using fetch from:
 
-Every 2 seconds a random item from the list is selected. Selected - this means that styles are applied to it - green color and bold font.
-When half of the elements become active (green) – add border to the table (border-width: 10px)
-When all elements are active (green) – change border width of the table to 20px.
+https://65ef5bb3ead08fa78a5055fb.mockapi.io/todos
+
+Сервіс mockapi замість методу PATCH приймає запити методом PUT.
+https://jsonplaceholder.typicode.com/
+https://jsonplaceholder.typicode.com/todos
+
+
+Task:
+
+1) Render a list from one of the resources:
+https://65ef5bb3ead08fa78a5055fb.mockapi.io/todos
+https://jsonplaceholder.typicode.com/todos
+
+
+2) Ability to change a list item using one (or both 🌟) of the inputs:
+ - input[type=checkbox] for item.completed
+ - input[type=text] for item.title
+
+Ability to delete a list item.
