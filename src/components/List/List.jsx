@@ -1,19 +1,28 @@
-import { Component } from "react";
+import { PureComponent } from "react";
+import todos from "./../../service/todos";
+import { DEFAULT_TODO } from "../../constants/todos";
+import "./style.sass";
 
-export default class List extends Component {
+export default class List extends PureComponent {
+  constructor() {
+    super();
+
+    this.handleTitle = this.handleTitle.bind(this);
+    this.handleCompleteNewTodo = this.handleCompleteNewTodo.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   state = {
     list: [],
+    newTodo: DEFAULT_TODO,
   };
 
   async componentDidMount() {
     try {
-      let request = await fetch(
-          "https://65ef5bb3ead08fa78a5055fb.mockapi.io/todos"
-        ),
-        response = await request.json();
+      let response = await todos.get();
 
       this.setState({
-        list: response,
+        list: response.slice(0, 10),
       });
     } catch (err) {
       console.log(err);
@@ -22,9 +31,7 @@ export default class List extends Component {
 
   async handleDelete(id) {
     try {
-      await fetch(`https://65ef5bb3ead08fa78a5055fb.mockapi.io/todos/${id}`, {
-        method: "DELETE",
-      });
+      await todos.delete(id);
 
       this.setState((actualState) => ({
         list: actualState.list.filter((item) => item.id !== id),
@@ -36,17 +43,7 @@ export default class List extends Component {
 
   async handleComplete(item) {
     try {
-      let request = await fetch(
-          `https://65ef5bb3ead08fa78a5055fb.mockapi.io/todos/${item.id}`,
-          {
-            method: "PUT",
-            body: JSON.stringify({ completed: !item.completed }),
-            headers: {
-              "Content-type": "application/json",
-            },
-          }
-        ),
-        response = await request.json();
+      let response = await todos.patch(item.id, { completed: !item.completed });
 
       this.setState((actualState) => ({
         list: actualState.list.map((elem) => {
@@ -59,60 +56,85 @@ export default class List extends Component {
     }
   }
 
-  async handleTitleChange(event, id) {
-    try {
-      let request = await fetch(
-          `https://65ef5bb3ead08fa78a5055fb.mockapi.io/todos/${id}`,
-          {
-            method: "PUT",
-            body: JSON.stringify({ title: event.target.value }),
-            headers: {
-              "Content-type": "application/json",
-            },
-          }
-        ),
-        response = await request.json();
+  handleTitle(event) {
+    this.setState((actualState) => ({
+      newTodo: { ...actualState.newTodo, title: event.target.value },
+    }));
+  }
 
-      this.setState((actualState) => ({
-        list: actualState.list.map((elem) => {
-          if (elem.id === response.id) elem = response;
-          return elem;
+  handleCompleteNewTodo(event) {
+    this.setState((actualState) => ({
+      newTodo: { ...actualState.newTodo, completed: event.target.checked },
+    }));
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    try {
+      const response = await todos.post(this.state.newTodo);
+
+      this.setState(
+        (actualState) => ({
+          list: [...actualState.list, response],
         }),
-      }));
+        () => {
+          this.setState({
+            newTodo: DEFAULT_TODO,
+          });
+        }
+      );
     } catch (err) {
       console.log(err);
     }
   }
 
   render() {
-    const { list } = this.state;
+    const { list, newTodo } = this.state;
 
-    return list.length ? (
-      <ul>
-        {list.map((item) => (
-          <li key={item.id}>
-            {item.title}
-            <button
-              style={{ marginLeft: "10px" }}
-              onClick={() => this.handleDelete(item.id)}
-            >
-              Delete
-            </button>
-            <label>
-              <input
-                type="checkbox"
-                defaultChecked={item.completed}
-                onChange={() => this.handleComplete(item)}
-              />
-              <input
-                type="text"
-                defaultValue={item.title}
-                onChange={(event) => this.handleTitleChange(event, item.id)}
-              />
-            </label>
-          </li>
-        ))}
-      </ul>
-    ) : null;
+    return (
+      <>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Title:
+            <input
+              type="text"
+              value={newTodo.title}
+              onChange={this.handleTitle}
+            />
+          </label>
+          <label>
+            Completed:
+            <input
+              type="checkbox"
+              checked={newTodo.completed}
+              onChange={this.handleCompleteNewTodo}
+            />
+          </label>
+          <button>Add todo</button>
+        </form>
+        {list.length ? (
+          <ul>
+            {list.map((item) => (
+              <li key={item.id}>
+                {item.title}
+                <button
+                  style={{ marginLeft: "10px" }}
+                  onClick={() => this.handleDelete(item.id)}
+                >
+                  Delete
+                </button>
+                <label>
+                  <input
+                    type="checkbox"
+                    defaultChecked={item.completed}
+                    onChange={() => this.handleComplete(item)}
+                  />
+                </label>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </>
+    );
   }
 }
