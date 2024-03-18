@@ -43,8 +43,11 @@ export default class List extends PureComponent {
 
   async handleComplete(item) {
     try {
-      let response = await todos.patch(item.id, { completed: !item.completed, id:item.id, title: item.title });
-      console.log(response)
+      let response = await todos.patch(item.id, {
+        completed: !item.completed,
+        id: item.id,
+        title: item.title,
+      });
 
       this.setState((actualState) => ({
         list: actualState.list.map((elem) => {
