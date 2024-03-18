@@ -43,7 +43,8 @@ export default class List extends PureComponent {
 
   async handleComplete(item) {
     try {
-      let response = await todos.patch(item.id, { completed: !item.completed });
+      let response = await todos.patch(item.id, { completed: !item.completed, id:item.id, title: item.title });
+      console.log(response)
 
       this.setState((actualState) => ({
         list: actualState.list.map((elem) => {
@@ -64,7 +65,10 @@ export default class List extends PureComponent {
 
   handleCompleteNewTodo(event) {
     this.setState((actualState) => ({
-      newTodo: { ...actualState.newTodo, completed: event.target.checked },
+      newTodo: {
+        ...actualState.newTodo,
+        completed: event.target.checked,
+      },
     }));
   }
 
@@ -72,10 +76,11 @@ export default class List extends PureComponent {
     event.preventDefault();
     try {
       const response = await todos.post(this.state.newTodo);
+      console.log(this.state.newTodo);
 
       this.setState(
         (actualState) => ({
-          list: [...actualState.list, response],
+          list: [...actualState.list, { ...response, id: Date.now() }],
         }),
         () => {
           this.setState({

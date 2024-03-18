@@ -1,6 +1,6 @@
 const DEFAULT_TODO = {
   title: "",
-  completed: false,
+  completed: false
 };
 
 export { DEFAULT_TODO };
