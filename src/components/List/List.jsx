@@ -79,7 +79,6 @@ export default class List extends PureComponent {
     event.preventDefault();
     try {
       const response = await todos.post(this.state.newTodo);
-      console.log(this.state.newTodo);
 
       this.setState(
         (actualState) => ({
